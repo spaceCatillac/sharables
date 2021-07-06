@@ -35,9 +35,16 @@ for obj in objs:
 
 #########################################################
 
-muteState = cmds.mute(attrsToMute[0], q=True)
-print muteState
-if not muteState:
-    cmds.mute(attrsToMute, force=True)
+if 'attrsToMute' in locals():
+    muteState = cmds.mute(attrsToMute[0], q=True)
+    if not muteState:
+        cmds.mute(attrsToMute, force=True)
+    else:
+        cmds.mute(attrsToMute, disable=True, force=True)
 else:
-    cmds.mute(attrsToMute, disable=True, force=True)
+    objs = cmds.ls(sl=True)
+    muteState = cmds.mute('{}.tx'.format(objs[0]), q=True)
+    if not muteState:
+        cmds.mute(objs, force=True)
+    else:
+        cmds.mute(objs, disable=True, force=True)
