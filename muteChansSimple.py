@@ -18,7 +18,8 @@ chans = getSelectedChannels()
 
 if not chans:
     objs = cmds.ls(sl=True)
-    muteState = cmds.mute('{}.tx'.format(objs[0]), q=True)
+    attrsObjs = cmds.listAttr(objs, keyable=True, u=True, v=True)
+    muteState = cmds.mute('{}.{}'.format(objs[0], attrsObjs[0]), q=True)
     if not muteState:
         cmds.mute(objs, force=True)
     else:
@@ -33,5 +34,8 @@ else:
     muteState = cmds.mute(attrsToMute[0], q=True)
     if not muteState:
         cmds.mute(attrsToMute, force=True)
+    else:
+        cmds.mute(attrsToMute, disable=True, force=True)
+
     else:
         cmds.mute(attrsToMute, disable=True, force=True)
