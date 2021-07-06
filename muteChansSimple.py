@@ -36,6 +36,3 @@ else:
         cmds.mute(attrsToMute, force=True)
     else:
         cmds.mute(attrsToMute, disable=True, force=True)
-
-    else:
-        cmds.mute(attrsToMute, disable=True, force=True)
